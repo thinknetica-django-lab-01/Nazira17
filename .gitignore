@@ -1,0 +1,6 @@
+.idea
+db.sqlite3
+__pycache__/
+.roperproject
+.pytest_cache/
+*.pyc
