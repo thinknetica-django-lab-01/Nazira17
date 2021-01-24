@@ -23,7 +23,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tags)
     description = models.TextField()
-    price = models.DecimalField()
+    price = models.IntegerField()
 
     def __str__(self):
         return self.name
