@@ -4,3 +4,4 @@ __pycache__/
 .roperproject
 .pytest_cache/
 *.pyc
+venv/
