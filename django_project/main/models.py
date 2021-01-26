@@ -24,6 +24,7 @@ class Product(models.Model):
     tag = models.ManyToManyField(Tags)
     description = models.TextField()
     price = models.IntegerField()
+    title = models.CharField(blank=True, max_length=200)
 
     def __str__(self):
         return self.name
