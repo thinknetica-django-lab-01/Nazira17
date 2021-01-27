@@ -1,3 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if turn_on_block %}
+<p style="padding-top:400px;">Hi, {{ request.user }}</p>
+{% endif %}
 {% endblock %}
