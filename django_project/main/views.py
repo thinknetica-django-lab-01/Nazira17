@@ -6,9 +6,11 @@ from .models import Customer
 #     return render(request, 'hello.html')
 
 
-# def index(request):
-#     turn_on_block = True
-#     return render(request, 'index.html', turn_on_block)
+def user(request):
+    context = {
+        'customers': Customer.objects.filter(user=request.user),
+    }
+    return render(request, 'new.html', context)
 
 
 def home(request):
