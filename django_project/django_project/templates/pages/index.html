@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block header %}
+{% include 'new.html' with user=customers%}
+{% endblock %}
 {% block content %}
     {{ flatpage.content }}
 {% endblock %}
