@@ -1,9 +1,20 @@
-from django.shortcuts import render
-from .models import Customer
+from django.shortcuts import render, get_object_or_404
+from .models import *
+from django.views.generic import ListView, DetailView
 
 
-# def home(request):
-#     return render(request, 'hello.html')
+class ProductList(ListView):
+    model = Product
+    context_object_name = 'products'
+    template_name = 'product.html'
+
+
+class ProductDetailView(DetailView):
+    template_name = 'product-detail.html'
+
+    def get_object(self):
+        id_ = self.kwargs.get('id')
+        return get_object_or_404(Product, id=id_)
 
 
 def user(request):
