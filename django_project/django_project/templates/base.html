@@ -1,3 +1,4 @@
+{% load main_tags %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -51,6 +52,9 @@
 <main role="main">
     <section class="jumbotron text-center">
         <div class="container">
+            {% current_time "%Y-%m-%d %I:%M %p" as the_time %}
+            <p>The time is {{ the_time }}.</p>
+            {{ "Привет, мир!"|string_reverse }}
             <h1>Album example</h1>
             <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
                 etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
