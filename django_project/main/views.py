@@ -1,12 +1,35 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
 from django.views.generic import ListView, DetailView
+from django.core.paginator import Paginator
 
 
 class ProductList(ListView):
     model = Product
     context_object_name = 'products'
     template_name = 'product.html'
+    paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductList, self).get_context_data(**kwargs)
+        
+        product_list = Product.objects.all()
+        paginator = Paginator(product_list, self.paginate_by)
+        page_number = self.request.GET.get('page', 1)
+        page_obj = paginator.get_page(page_number)
+        context['paje_obj'] = page_obj
+        context['page_number'] = int(page_number)
+        context['paginator'] = paginator
+        return context
+
+    def get_queryset(self):
+        queryset = super(ProductList, self).get_queryset()
+        query = self.request.GET.get('tag')
+        if query:
+            object_list = queryset.filter(tag__name=query)
+        else:
+            object_list = queryset
+        return object_list
 
 
 class ProductDetailView(DetailView):
