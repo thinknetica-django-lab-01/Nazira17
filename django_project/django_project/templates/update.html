@@ -1,0 +1,13 @@
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#" align="right">
+        {% if request.user.is_authenticated %}
+            Hello, {{ user.last_name }}, and welcome your profile !
+        {% else %}
+            Hi, please log in :)
+        {% endif %}
+    </a>
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+</form>
+</nav>
