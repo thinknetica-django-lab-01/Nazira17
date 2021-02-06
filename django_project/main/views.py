@@ -4,13 +4,12 @@ from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator
 from django.views.generic.edit import UpdateView
 from .forms import UserProfileForm
-from django.urls import reverse
 
 
 class CustomerUpdate(UpdateView):
+    model = Customer
     form_class = UserProfileForm
     template_name = 'update.html'
-    model = Customer
 
     def get_object(self, queryset=None):
         return self.request.user

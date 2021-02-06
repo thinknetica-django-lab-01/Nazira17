@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#" align="right">
         {% if request.user.is_authenticated %}
@@ -6,8 +9,9 @@
             Hi, please log in :)
         {% endif %}
     </a>
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update">
-</form>
-</nav>
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update">
+    </form>
+    </nav>
+{% endblock content %}
