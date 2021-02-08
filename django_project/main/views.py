@@ -4,12 +4,13 @@ from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator
 from django.views.generic.edit import UpdateView
 from .forms import UserProfileForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class CustomerUpdate(UpdateView):
+class CustomerUpdate(LoginRequiredMixin, UpdateView):
     model = Customer
     form_class = UserProfileForm
-    template_name = 'update.html'
+    template_name = 'login_update.html'
 
     def get_object(self, queryset=None):
         return self.request.user
