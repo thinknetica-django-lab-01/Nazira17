@@ -1,5 +1,5 @@
 from django import forms
-from .models import Customer
+from .models import Customer, Product
 from django.core.exceptions import ValidationError
 
 
@@ -14,3 +14,11 @@ class UserProfileForm(forms.ModelForm):
         if self.cleaned_data['age'] < 18:
             raise ValidationError('Age must be at least 18.')
         return self.cleaned_data['age']
+
+
+class ProductCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+
