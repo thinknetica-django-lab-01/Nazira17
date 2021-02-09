@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import *
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator
-from django.views.generic.edit import UpdateView
-from .forms import UserProfileForm
+from django.views.generic.edit import UpdateView, CreateViewfrom 
+from .forms import UserProfileForm, ProductCreateForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -53,6 +53,20 @@ class ProductDetailView(DetailView):
     def get_object(self):
         id_ = self.kwargs.get('id')
         return get_object_or_404(Product, id=id_)
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductCreateForm
+    context_object_name = 'products'
+    template_name = 'product-add.html'
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductCreateForm
+    context_object_name = 'products'
+    template_name = 'product-add.html'
 
 
 def user(request):

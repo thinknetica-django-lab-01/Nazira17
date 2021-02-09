@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% if request.user.is_authenticated %}
+{% endif %}
+{% block content %}
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+</form>
+{% endblock content %}
