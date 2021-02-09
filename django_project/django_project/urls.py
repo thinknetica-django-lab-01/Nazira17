@@ -26,4 +26,5 @@ urlpatterns = [
     path('pages/', include('django.contrib.flatpages.urls')),
     path('admin/', admin.site.urls),
     path('accounts/profile/', CustomerUpdate.as_view(), name='customer-update'),
+    path('accounts/', include('allauth.urls')),
 ]
