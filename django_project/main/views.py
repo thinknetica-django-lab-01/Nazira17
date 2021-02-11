@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import *
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator
-from django.views.generic.edit import UpdateView, CreateViewfrom 
+from django.views.generic.edit import UpdateView, CreateView
 from .forms import UserProfileForm, ProductCreateForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
