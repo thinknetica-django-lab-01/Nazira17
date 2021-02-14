@@ -8,7 +8,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = Customer
-        fields = ["name", "last_name", "email"]
+        fields = ["name", "email", "last_name"]
 
     def clean_age(self):
         if self.cleaned_data['age'] < 18:
