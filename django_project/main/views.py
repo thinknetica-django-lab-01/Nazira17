@@ -83,3 +83,4 @@ def home(request):
         'turn_on_block': turn_on_block
     }
     return render(request, 'hello.html', context)
+

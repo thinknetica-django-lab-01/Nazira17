@@ -6,7 +6,6 @@ django-js-asset==1.2.2
 importlib-metadata==3.4.0
 iniconfig==1.1.1
 packaging==20.8
-pkg-resources==0.0.0
 pluggy==0.13.1
 py==1.10.0
 pyparsing==2.4.7
@@ -17,3 +16,4 @@ sqlparse==0.4.1
 toml==0.10.2
 typing-extensions==3.7.4.3
 zipp==3.4.0
+django-allauth~=0.44.0
