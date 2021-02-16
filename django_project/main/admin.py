@@ -4,7 +4,7 @@ from django.contrib.flatpages.models import FlatPage
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 from django.db import models
-from .models import Product, Tags, Category
+from .models import Product, Tags, Category, Subscriber
 
 
 class FlatPageCustom(FlatPageAdmin):
@@ -29,6 +29,11 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
 
 
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ('id', 'subscriber')
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Tags, TagsAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Subscriber, SubscriberAdmin)

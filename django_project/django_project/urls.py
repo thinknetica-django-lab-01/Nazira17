@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from main import views
-from main.views import ProductList, ProductDetailView, CustomerUpdate, ProductCreateView, ProductUpdateView
+from main.views import *
 urlpatterns = [
     path('', views.home),
-    path('goods/', ProductList.as_view()),
+    path('goods/', ProductList.as_view(), name="product"),
     path('goods/add/', ProductCreateView.as_view(), name="product_add"),
     path('goods/<int:pk>/edit/', ProductUpdateView.as_view(), name="product_edit"),
     path('goods/<int:id>', ProductDetailView.as_view(), name="product_detail"),
@@ -27,4 +27,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/profile/', CustomerUpdate.as_view(), name='customer-update'),
     path('accounts/', include('allauth.urls')),
+    path('subscriber/', subscribe_user, name='subscriber'),
 ]

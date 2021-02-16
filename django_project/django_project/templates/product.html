@@ -21,15 +21,12 @@
                                 </span>
                                 <a href="?tag={{ tag }}"> {{tag.name}} </a>
                             {% endfor %}
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
+                            <form action="{% url 'subscriber' %}" method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                                <input class="btn btn-primary" type="submit" role="button" value="subscribe">
+                            </form>
                         </div>
-                    </div>
                     {% endfor %}
                     {% include 'pagination.html'%}
                 </div>
