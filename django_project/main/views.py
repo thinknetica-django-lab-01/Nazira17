@@ -1,9 +1,6 @@
 from django.template.loader import render_to_string
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.template.loader import get_template
 from django.urls import reverse
 from django.core.mail import EmailMultiAlternatives
 from .models import *
@@ -102,17 +99,4 @@ def subscribe_user(request):
         if form.is_valid():
             Subscriber.objects.create(subscriber=request.user)
         return HttpResponseRedirect(reverse('product'))
-
-
-def send_new_good(Product, **kwargs):
-    subject = 'Check out the new product'
-    message = render_to_string('account/email/new_good.html', {
-        'product': Product.name,
-        'name': Subscriber.subscriber,
-        })
-    text_content = render_to_string("account/email/new_good.txt", {"name": Subscriber.subscriber})
-    email = EmailMultiAlternatives(subject, text_content, from_email='nazira.yegizbayeva@gmail.com',
-                                   to=[Subscriber.objects.values("subscriber__email")])
-    email.attach_alternative(message, 'text/html')
-    email.send()
 

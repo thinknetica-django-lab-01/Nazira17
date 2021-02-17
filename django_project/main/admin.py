@@ -18,7 +18,7 @@ admin.site.register(FlatPage, FlatPageCustom)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'category', 'description', 'price', 'title')
+    list_display = ('id', 'name', 'category', 'description', 'price', 'title', 'add_date')
 
 
 class TagsAdmin(admin.ModelAdmin):

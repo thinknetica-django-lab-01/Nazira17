@@ -5,12 +5,6 @@ from allauth.account.signals import user_signed_up
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from .models import *
-from django.core.mail import send_mail
-from django.dispatch import Signal
-
-from .views import send_new_good, subscribe_user
-
-new_subscriber = Signal(providing_args=["subscribe_user", "send_new_good"])
 
 
 @receiver(post_save, sender=User)
@@ -29,9 +23,3 @@ def send_welcome_email(user, **kwargs):
     email = EmailMultiAlternatives(subject, text_content, from_email='nazira.yegizbayeva@gmail.com', to=[user.email])
     email.attach_alternative(message, 'text/html')
     email.send()
-
-
-@receiver(post_save, sender=Product)
-def notify_subscribers(sender, instance, created, **kwargs):
-    if created:
-        send_new_good(instance)
