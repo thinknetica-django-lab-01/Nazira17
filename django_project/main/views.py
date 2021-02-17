@@ -1,10 +1,18 @@
+from django.template.loader import render_to_string
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.template.loader import get_template
+from django.urls import reverse
+from django.core.mail import EmailMultiAlternatives
 from .models import *
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator
 from django.views.generic.edit import UpdateView, CreateView
 from .forms import UserProfileForm, ProductCreateForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django import forms
 
 
 class CustomerUpdate(LoginRequiredMixin, UpdateView):
@@ -27,7 +35,7 @@ class ProductList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductList, self).get_context_data(**kwargs)
-        
+
         product_list = Product.objects.all()
         paginator = Paginator(product_list, self.paginate_by)
         page_number = self.request.GET.get('page', 1)
@@ -61,6 +69,9 @@ class ProductCreateView(CreateView):
     context_object_name = 'products'
     template_name = 'product-add.html'
 
+    def get_success_url(self):
+        return '/goods'
+
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -83,4 +94,25 @@ def home(request):
         'turn_on_block': turn_on_block
     }
     return render(request, 'hello.html', context)
+
+
+def subscribe_user(request):
+    if request.method == 'POST':
+        form = forms.Form(request.POST)
+        if form.is_valid():
+            Subscriber.objects.create(subscriber=request.user)
+        return HttpResponseRedirect(reverse('product'))
+
+
+def send_new_good(Product, **kwargs):
+    subject = 'Check out the new product'
+    message = render_to_string('account/email/new_good.html', {
+        'product': Product.name,
+        'name': Subscriber.subscriber,
+        })
+    text_content = render_to_string("account/email/new_good.txt", {"name": Subscriber.subscriber})
+    email = EmailMultiAlternatives(subject, text_content, from_email='nazira.yegizbayeva@gmail.com',
+                                   to=[Subscriber.objects.values("subscriber__email")])
+    email.attach_alternative(message, 'text/html')
+    email.send()
 

@@ -13,6 +13,16 @@ class Customer(models.Model):
         return self.name
 
 
+class Subscriber(models.Model):
+    subscriber = models.ForeignKey(
+        User, related_name='subscribers',
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.subscriber
+
+
 class Tags(models.Model):
     name = models.CharField(max_length=200)
 
