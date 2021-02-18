@@ -41,6 +41,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.IntegerField()
     title = models.CharField(blank=True, max_length=200)
+    add_date = models.DateTimeField("add date", auto_now_add=True)
 
     def __str__(self):
         return self.name
