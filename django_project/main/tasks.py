@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 from datetime import datetime, timedelta
 
 
-@shared_task()
+@shared_task
 def send_new_good():
     subscribers = Subscriber.objects.values("subscriber__email")
     today = datetime.today()
@@ -20,4 +20,3 @@ def send_new_good():
                                    to=[subscribers])
     email.attach_alternative(message, 'text/html')
     email.send()
-    print('sended')
