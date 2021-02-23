@@ -7,6 +7,6 @@ class MainConfig(AppConfig):
     def ready(self):
         import main.signals
 
-    def ready(self):
-        from . import services
-        services.start()
+    # def ready(self):
+    #     from . import services
+    #     services.start()
