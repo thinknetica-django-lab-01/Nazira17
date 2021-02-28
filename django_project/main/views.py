@@ -10,6 +10,10 @@ from django.views.generic.edit import UpdateView, CreateView
 from .forms import UserProfileForm, ProductCreateForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.views.decorators.cache import cache_page
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 
 class CustomerUpdate(LoginRequiredMixin, UpdateView):
@@ -52,6 +56,7 @@ class ProductList(ListView):
         return object_list
 
 
+@cache_page(CACHE_TTL)
 class ProductDetailView(DetailView):
     template_name = 'product-detail.html'
 
