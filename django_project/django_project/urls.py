@@ -17,12 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from main import views
 from main.views import *
+from django.views.decorators.cache import cache_page
+
 urlpatterns = [
     path('', views.home),
     path('goods/', ProductList.as_view(), name="product"),
     path('goods/add/', ProductCreateView.as_view(), name="product_add"),
     path('goods/<int:pk>/edit/', ProductUpdateView.as_view(), name="product_edit"),
-    path('goods/<int:id>', ProductDetailView.as_view(), name="product_detail"),
+    path('goods/<int:id>', cache_page(60 * 15)(ProductDetailView.as_view()), name="product_detail"),
     path('pages/', include('django.contrib.flatpages.urls')),
     path('admin/', admin.site.urls),
     path('accounts/profile/', CustomerUpdate.as_view(), name='customer-update'),
