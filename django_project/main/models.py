@@ -42,6 +42,7 @@ class Product(models.Model):
     price = models.IntegerField()
     title = models.CharField(blank=True, max_length=200)
     add_date = models.DateTimeField("add date", auto_now_add=True)
+    product_view = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

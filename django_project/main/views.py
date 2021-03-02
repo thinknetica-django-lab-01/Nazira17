@@ -64,7 +64,10 @@ class ProductDetailView(DetailView):
 
     def get_object(self):
         id_ = self.kwargs.get('id')
-        return get_object_or_404(Product, id=id_)
+        views = Product.objects.get(id=id_)
+        views.product_view += 1
+        views.save()
+        return views
 
 
 class ProductCreateView(CreateView):
